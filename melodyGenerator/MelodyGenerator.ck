@@ -1,70 +1,49 @@
-// ================================================================================
+// ==============================================================================
 // PUBLIC CLASS: MelodyGenerator
 // File        : MelodyGenerator.ck
 // Author      : son0p
 // Init Date   : 2013-Dec-31
 // Dependencies: Mode.ck
-// License     : 
-// ================================================================================
+// License     :
+// Git repo    : https://github.com/son0p/ChucK-classes-and-patches
+// ==============================================================================
 // This class takes root note and mode then returns a melody
 
 public class MelodyGenerator
 {
 	static int root;
 	int number;
-
+	 int notes[];
+	// creates a melody array  of the notes array size
+	 int melody[8];
+	
 	Mode mode;
 
 	// Generate melody 
-	fun int[] melody(int root, int modeInput)
+	fun int[] generateMelody(int root, int modeInput)
 	{
-	// TODO we need to call modes from Mode class not here	  	
-		if (modeInput == 1)  
+		mode.generateMode(root, modeInput) @=> int notes[];
+		<<< "Mode: ", modeInput >>>;
+		for (0 => int i; i < notes.cap(); i++)
 		{
-			mode.ionian(root) @=> int notes[];
-			return notes;
+			Math.random2(1, notes.cap())-1 => int notesSelector;
+			notes[notesSelector] => int pushNote;
+			// Fill the array with selected notes
+			pushNote =>  melody[i];
 		}
-	
-		if (modeInput == 2)  
-		{
-			mode.dorian(root) @=> int notes[];
-			return notes;
-		}
-	
-		if (modeInput == 3)  
-		{
-			mode.phrygian(root) @=> int notes[];
-			return notes;
-		}
-		if (modeInput == 4)  
-		{
-			mode.lydian(root) @=> int notes[];
-			return notes;
-		}
-		if (modeInput == 5)  
-		{
-			mode.mixolidian(root) @=> int notes[];
-			return notes;
-		}
-		if (modeInput == 6)  
-		{
-			mode.aeolian(root) @=> int notes[];
-			return notes;
-		}
-		if (modeInput == 7)  
-		{
-			mode.locrian(root) @=> int notes[];
-			return notes;
-		}
+		return melody;
 	}
 }
 
 
-// ================================================================================
+// ==============================================================================
 // Test code
+
 /*
+MelodyGenerator m;
 
-
-
-
+m.generateMelody(60,2);
 */
+//===============================================================================
+
+
