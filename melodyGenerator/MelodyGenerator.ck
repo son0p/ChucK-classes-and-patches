@@ -13,9 +13,11 @@ public class MelodyGenerator
 {
 	static int root;
 	int number;
-	 int notes[];
-	// creates a melody array  of the notes array size
-	 int melody[8];
+	int notes[];
+	// TODO: This must be :
+	// int melody[notes.cap()];
+	// but produces NullPointerException
+	int melody[8];
 	
 	Mode mode;
 
