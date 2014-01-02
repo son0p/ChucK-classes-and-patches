@@ -7,9 +7,9 @@ Chuck
 
 A working example can be running
 
-> clone https://github.com/son0p/ChucK-classes-and-patches
+	clone https://github.com/son0p/ChucK-classes-and-patches
 
-> cd Chuck-classes-and-patches
+	cd Chuck-classes-and-patches
 
-> chuck initialize.ck
+	chuck initialize.ck
 
