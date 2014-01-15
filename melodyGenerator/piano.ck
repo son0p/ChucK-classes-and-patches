@@ -2,37 +2,47 @@
 
 // sound chain
 Rhodey piano[4];
-piano[0] => dac.left;
-piano[1] => dac;
+piano[0] =>  dac.left;
+piano[1] => NRev r => dac;
 piano[2] => dac;
 piano[3] => dac.right;
+TriOsc tri => NRev r2 => Pan2 p => dac;
+
 
 //initialize gains
 for( 0 => int i; i < 4; i++ )
 {
-    .3 => piano[i].gain;
+    .5 => piano[i].gain;
 }
+.1 => r.mix;
+.1 => tri.gain;
 
 // define timings
 BPM tempo;
-MelodyGenerator melody;
+MelodyGenerator m;
 
-while(true)
-{
-	for(0 => int ii; ii < 7; ii++)
-	{
-		melody.generateMelody(60, ii+1) @=> int melody[];
-				
-		for(0 => int i; i < melody.cap(); i++)
+
+while(true){
+	m.generateMelody(64,6) @=> int melody[];
+	for(0 => int i; i < melody.cap(); i++)
 		{
-			Std.mtof(melody[i]) => piano[1].freq;
-			0.5 => piano[1].noteOn;
-			tempo.quarterNote => now;
-			<<< melody[i] >>>;
-		}
-	}
+			// Piano 
+			Math.random2(0,3) => int selPiano;
+			Std.mtof(melody[i])/2 => piano[selPiano].freq;
+			Math.random2f(0.5, 0.9) => piano[selPiano].noteOn;
+			// TriOsc
+			Std.mtof(melody[i])*2 => tri.freq;
+			Math.sin( now/(100*tempo.quarterNote)*4*pi ) => p.pan;
+			Math.sin( now/(0.1*(100*tempo.wholeNote)*4*pi )/4) => tri.gain;
+			// call duration from class
+			m.generateDuration() => int duration;
+			tempo.wholeNote/duration => now;
+		
+
+		
+		}	
+		
+
 }
-
-
 
 
