@@ -16,4 +16,4 @@ Machine.add(me.dir() + "/MelodyGenerator.ck");
 Machine.add(me.dir()+"/score.ck");
 
 // Keyboard Control Class
-//Machine.add(me.dir() + "/KeyboardCapture.ck");
+Machine.add(me.dir() + "/KeyboardCapture.ck");

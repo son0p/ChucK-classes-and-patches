@@ -7,12 +7,15 @@
 Mandolin bass => NRev r => LPF lf=> dac;
 SinOsc sub => ADSR e =>  dac;
 
-// call BPM class
+// call  classes
 BPM tempo;
-
-// scale data
 Mode mode;
-mode.generateMode(52,6) @=> int scale[];
+MelodyGenerator m;
+// scale data
+
+<<< "ROOT:",m.root>>>;
+ mode.generateMode(52,6) @=> int scale[];
+// m.generateMelody(m.root, m.mode) @=> int scale[];
  <<<"Bass root: ",  scale[0]>>>;
 
 // param setup
