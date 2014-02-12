@@ -22,20 +22,21 @@ MelodyGenerator m;
 // initailize first motive
 m.generateMelody(52,6) @=> int melody[];
 m.generateMotive(melody) @=> int motive[];
-m.generateDuration() => int duration;
-
+m.generateDuration() @=> int durations[];
+ 
 
 while(true)
 {
-counter % 4 => int change;
+	counter % 4 => int change;
 	// change motive each 4 rounds
 	if(change == 0){
 		m.generateMelody(52,2) @=> int melody[];
 		m.generateMotive(melody) @=> int motive[];
-		m.generateDuration() => int duration;
-		}
+		m.generateDuration() @=> int duration[];
+	}
 	for(0 => int ii; ii < motive.cap(); ii++)
 	{
+		
 		if(motive[ii] > 1){
 			Math.random2(0,3) => int selPiano;
 			Std.mtof(motive[ii]) => piano[selPiano].freq;
@@ -44,14 +45,14 @@ counter % 4 => int change;
 			0.5 => tri.gain;
 			e.keyOn;
 			e.keyOff;
-			tempo.wholeNote/duration => now;
+			tempo.wholeNote/durations[ii] => now;
 		}
 		else
 		{
 			e.keyOff;	
 		}
 	}
-counter++;
+	counter++;
 }	
 
 

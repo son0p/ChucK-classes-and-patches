@@ -1,8 +1,5 @@
 // bass.ck
 
-
-
-
 // sound chain
 Mandolin bass => NRev r => LPF lf=> dac;
 SinOsc sub => ADSR e =>  dac;
