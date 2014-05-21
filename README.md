@@ -11,5 +11,7 @@ A rudimentary example can be running
 
 	cd Chuck-classes-and-patches
 
+	cd melodyGenerator
+	
 	chuck initialize.ck
 
