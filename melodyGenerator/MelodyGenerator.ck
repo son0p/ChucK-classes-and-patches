@@ -18,13 +18,12 @@ public class MelodyGenerator
 	// int melody[notes.cap()];
 	// but produces NullPointerException
 	int melody[8];
-	[2,4,8,16] @=> int optDurations[];
+	[2,4,8,16] @=> int durations[];
 	// initialize new note to be compared in rules
 	int oldNote;
 	int pushNote;
 	Mode mode;
 	int motive[7];
-	int durations[8];
 
 	// Generate Motive
 
@@ -43,7 +42,7 @@ public class MelodyGenerator
 	{
 		// Ask for notes to  Mode class
 		mode.generateMode(root, modeInput) @=> int notes[];
-		// <<< "Mode: ", modeInput >>>;
+		<<< "Mode: ", modeInput >>>;
 
 		// Go over Mode array to pushing notes that obey the rules 
 		for	(0 => int i; i < melody.cap(); i++)
@@ -56,12 +55,12 @@ public class MelodyGenerator
 
 			if(newNote < (oldNote + 6))
 			{
-				// <<< "Rule 1: OK" >>>;
+				<<< "Rule 1: OK" >>>;
 				notes[noteSelector] => int pushNote;
 				pushNote => int oldNote;
 				// Fill the array with selected notes
 				pushNote =>  melody[i];
-				// <<< "push Note:",pushNote>>>; 
+				<<< "push Note:",pushNote>>>; 
 			}
 			
 	
@@ -83,33 +82,14 @@ public class MelodyGenerator
 		return motive;
 	}
 	
-	// Size of the array of durations must be equal to number of notes
-	fun int[] generateDuration()
+	// TODO : duration must fill a measure
+	fun int generateDuration()
 	{
-		// we have to fit in a measure, so reset the sumatory of durations
-		0 => int sumDurations;
-
-		for (0 => int i; i < durations.cap(); i++)
-		{
-		
-			// randomly select from otions of durations
-			Math.random2(1, optDurations.cap())-1 => int durationSelector;
-			optDurations[durationSelector] => int pushDuration;
-			// fill the array
-			pushDuration => durations[i];
-			<<< "durArray : "+ durations[i]>>>;
-			// sum the values to evaluate total and fit in a measure, fill with silences?
-			pushDuration +=>  sumDurations;
-			
-		}
-			<<< "-------------------------">>>;		
-		// sum array to check measure fit
-		
-
-		<<< "First 4 elements Sum : " + sumDurations >>>;
-		return durations;	
+		Math.random2(1, durations.cap())-1 => int durationSelector;
+		durations[durationSelector] => int pushDuration;
+		return pushDuration;
 	}
-
+	
 }
 
 
